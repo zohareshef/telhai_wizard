@@ -1,0 +1,169 @@
+<div>
+	<h1 style="text-align: center">Wizard Editor</h1>
+	<div class="centered-row">
+		<mat-form-field appearance="outline" floatLabel="always">
+			<mat-label>Wizard Title</mat-label>
+			<input #title="ngModel" matInput required [(ngModel)]="wizard.title" />
+			<mat-error *ngIf="title.hasError('required')">
+				Wizard title is required
+			</mat-error>
+		</mat-form-field>
+		<button
+			class="side-btn"
+			mat-button
+			color="accent"
+			[disabled]="isSaving"
+			matTooltip="Save Wizard"
+			(click)="saveWizard()">
+			<mat-icon *ngIf="!isSaving">save</mat-icon>
+			<mat-spinner diameter="25" color="accent" *ngIf="isSaving"></mat-spinner>
+		</button>
+	</div>
+
+	<mat-tab-group animationDuration="0">
+		<mat-tab
+			bodyClass="tab-body"
+			*ngFor="let page of wizard.pages; let pageIndex = index">
+			<ng-template mat-tab-label>
+				<span matTooltip="{{ page.title | ellipsis }}">
+					page {{ pageIndex + 1 }}
+				</span>
+			</ng-template>
+			<div tab-content>
+				<div class="centered-row">
+					<mat-form-field
+						appearance="outline"
+						floatLabel="always"
+						style="flex: 1">
+						<mat-label>Title</mat-label>
+						<input
+							#title="ngModel"
+							matInput
+							required
+							[(ngModel)]="page.title" />
+						<mat-error *ngIf="title.hasError('required')">
+							Page title is required
+						</mat-error>
+					</mat-form-field>
+
+					<button
+						mat-button
+						class="side-btn"
+						color="warn"
+						matTooltip="Delete page"
+						[disabled]="wizard.pages.length === 1"
+						(click)="deletePage(pageIndex)">
+						<mat-icon> delete </mat-icon>
+					</button>
+				</div>
+
+				<div class="centered-row">
+					<mat-form-field appearance="outline" floatLabel="always">
+						<mat-label>Description</mat-label>
+						<textarea
+							matInput
+							cdkAutosizeMinRows="2"
+							cdkTextareaAutosize
+							cdkAutosizeMaxRows="10"
+							[(ngModel)]="page.description">
+						</textarea>
+					</mat-form-field>
+				</div>
+				<mat-accordion>
+					<mat-expansion-panel
+						expanded
+						*ngFor="let form of page.forms; let formIndex = index">
+						<mat-expansion-panel-header>
+							<mat-panel-title>
+								<mat-icon style="margin-right: 0.5em">description</mat-icon>
+								<span>
+									{{ 'Form #' + (formIndex + 1) }}
+								</span>
+							</mat-panel-title>
+							<mat-panel-description>
+								{{ form.title | ellipsis }}
+							</mat-panel-description>
+						</mat-expansion-panel-header>
+
+						<div class="centered-row">
+							<mat-form-field
+								class="w-100"
+								appearance="outline"
+								floatLabel="always">
+								<mat-label>Form Title</mat-label>
+								<input matInput required [(ngModel)]="form.title" />
+							</mat-form-field>
+						</div>
+						<div class="centered-row">
+							<mat-form-field
+								class="w-100"
+								appearance="outline"
+								floatLabel="always">
+								<mat-label>Form Description</mat-label>
+								<textarea
+									matInput
+									cdkAutosizeMinRows="2"
+									cdkTextareaAutosize
+									cdkAutosizeMaxRows="10"
+									[(ngModel)]="form.description">
+								</textarea>
+							</mat-form-field>
+						</div>
+
+						<ng-container
+							*ngFor="
+								let control of form.controls;
+								let i = index;
+								let first = first;
+								let last = last
+							">
+							<mat-divider *ngIf="i !== 0"></mat-divider>
+							<app-control-builder
+								[control]="control"
+								[moveUpDisabled]="first"
+								[moveDownDisabled]="last"
+								(remove)="removeControl(form, i)"
+								(move)="moveControl(form, i, $event)">
+							</app-control-builder>
+						</ng-container>
+
+						<mat-action-row>
+							<mat-panel-description class="form-action-row">
+								<button
+									mat-button
+									color="primary"
+									(click)="addNewControl(form)"
+									matTooltip="Add Control">
+									ADD CONTROL
+								</button>
+								<button
+									mat-button
+									color="warn"
+									[disabled]="page.forms.length === 1"
+									(click)="deleteForm($event, pageIndex, formIndex)">
+									DELETE
+								</button>
+							</mat-panel-description>
+						</mat-action-row>
+					</mat-expansion-panel>
+				</mat-accordion>
+			</div>
+			<div class="add-form-btn">
+				<button
+					mat-mini-fab
+					color="primary"
+					matTooltip="Add form"
+					(click)="addForm(page)">
+					<mat-icon>add_box</mat-icon>
+				</button>
+			</div>
+		</mat-tab>
+		<mat-tab labelClass="add-page-btn" disabled>
+			<ng-template mat-tab-label>
+				<button mat-icon-button matTooltip="Add page" (click)="addPage()">
+					<mat-icon>add</mat-icon>
+				</button>
+			</ng-template>
+		</mat-tab>
+	</mat-tab-group>
+</div>

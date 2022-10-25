@@ -1,0 +1,76 @@
+[tab-content] {
+  padding: 1em 0;
+  gap: 1em;
+}
+
+.centered-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-items: stretch;
+  gap: 0.5em;
+
+  &>mat-form-field {
+    width: 100%;
+  }
+}
+
+.control-list-item {
+  cursor: move;
+  background-color: rgb(66, 66, 66);
+}
+
+.control-placeholder {
+  border: dotted 3px #999;
+  min-height: 3em;
+  background-color: rgb(66, 66, 66);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+[card-like] {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 1em;
+  padding: 1em 0em;
+
+  div {
+    padding-left: 1em;
+    padding-right: 1em;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+.add-form-btn {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around; //transform: translate(0.5, 0.5);
+  padding-bottom: 1em;
+
+}
+
+.side-btn {
+  margin-bottom: 1.25em;
+}
+
+.form-action-row {
+  justify-content: space-between;
+}
+
+//override tab style
+::ng-deep {
+  .tab-body {
+    [cdkScrollable] {
+      overflow-y: hidden
+    }
+  }
+
+  div.add-page-btn {
+    min-width: 0;
+
+    button {
+      color: white;
+    }
+  }
+}

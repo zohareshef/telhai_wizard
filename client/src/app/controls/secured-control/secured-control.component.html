@@ -1,0 +1,20 @@
+<mat-form-field appearance="outline" floatLabel="always">
+	<mat-label>{{ payload.label }}</mat-label>
+	<input #input matInput [formControl]="_formControl!" type="password" />
+
+	<button
+		*ngIf="answered"
+		color="accent"
+		matSuffix
+		mat-icon-button
+		mat-stroked-button
+		(click)="toggleInputType()">
+		<mat-icon>
+			{{ input.type === 'password' ? 'visibility' : 'visibility_off' }}
+		</mat-icon>
+	</button>
+
+	<mat-error *ngIf="_formControl?.hasError('required')">
+		This value is required
+	</mat-error>
+</mat-form-field>

@@ -1,0 +1,50 @@
+@use "../../breakpoints" as bp;
+
+
+.control-editor {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 1em;
+
+	mat-form-field {
+		width: 100%;
+
+		@include bp.mat-gt-sm {
+			flex: 1;
+		}
+	}
+
+}
+
+
+:host(app-checkbox-control-editor, app-wizard-radio-builder) {
+	.remove-checkbox-item {
+		position: absolute;
+		top: 50%;
+		left: 0
+	}
+}
+
+::ng-deep .range-config .mat-form-field-infix {
+	@include bp.mat-gt-sm {
+		min-width: 100px;
+		width: 100px;
+	}
+}
+
+.picker-container {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin: 0 -24px;
+	padding-left: 24px;
+	padding-bottom: 14px;
+
+	&:first-child {
+		padding-top: 1em;
+	}
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.10);
+	}
+}

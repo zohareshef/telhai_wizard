@@ -1,0 +1,14 @@
+<div class="control-editor">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Label</mat-label>
+		<input
+			#label="ngModel"
+			required
+			matInput
+			[(ngModel)]="payload.text"
+			placeholder="Enter label" />
+		<mat-error *ngIf="label.hasError('required')">
+			Label is required
+		</mat-error>
+	</mat-form-field>
+</div>

@@ -1,0 +1,36 @@
+<div
+	class="control-editor"
+	*ngFor="let option of payload.options; let i = index"
+	style="align-items: center">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Option #{{ i + 1 }} Display Text</mat-label>
+		<input
+			matInput
+			required
+			#text="ngModel"
+			[(ngModel)]="option.text"
+			placeholder="Enter display text" />
+
+		<button
+			*ngIf="payload.options.length > 1"
+			matSuffix
+			mat-icon-button
+			aria-label="Clear"
+			(click)="removeOption(i)">
+			<mat-icon>close</mat-icon>
+		</button>
+
+		<mat-error *ngIf="text.hasError('required')">
+			Display text is required
+		</mat-error>
+	</mat-form-field>
+</div>
+<div class="control-editor" style="justify-content: center">
+	<button
+		color="primary"
+		mat-icon-button
+		(click)="addOption()"
+		matTooltip="Add Another Option">
+		<mat-icon>add</mat-icon>
+	</button>
+</div>

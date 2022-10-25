@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+	<p>
+		Delete <code>{{ wizard.title }}</code> wizard ?
+	</p>
+</div>
+<div mat-dialog-actions>
+	<button mat-button [mat-dialog-close]="false">No Thanks</button>
+	<button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+		DELETE
+	</button>
+</div>

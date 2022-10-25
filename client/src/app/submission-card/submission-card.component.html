@@ -1,0 +1,23 @@
+<mat-card>
+	<div style="display: flex; flex-flow: row nowrap; gap: 1em">
+		<button mat-icon-button>
+			<img
+				style="background-color: white; border-radius: 50%"
+				src="https://avatars.dicebear.com/api/miniavs/{{ author._id }}.svg" />
+		</button>
+		<div>
+			{{ submission.created | dateAgo }}
+			<br />
+			by <i>{{ author.firstname }} {{ author.lastname }}</i>
+		</div>
+		<button
+			mat-stroked-button
+			mat-icon-button
+			(click)="view.emit()"
+			matTooltip="View"
+			color="accent"
+			style="margin-left: auto">
+			<mat-icon>open_in_full</mat-icon>
+		</button>
+	</div>
+</mat-card>

@@ -1,0 +1,55 @@
+@use "../../breakpoints" as bp;
+@import url('https://fonts.googleapis.com/css2?family=Blaka+Hollow&display=swap&text=Wizzy');
+
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+main {
+  padding-top: 1em;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.user-menu {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: .5em;
+  font-size: 18px;
+  font-weight: 400;
+  align-items: center;
+  padding: .25em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15%/50%;
+  cursor: pointer;
+
+  &>span {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.logo {
+  font-size: 1.5em;
+  font-family: 'Blaka Hollow';
+}
+
+#content {
+  margin: 0 1em;
+
+  @include bp.mat-gt-xs {
+    margin: 0 10%;
+  }
+
+  @include bp.mat-gt-sm {
+    margin: 0 20%;
+  }
+}

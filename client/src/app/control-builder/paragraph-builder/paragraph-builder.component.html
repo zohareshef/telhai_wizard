@@ -1,0 +1,18 @@
+<div class="control-editor">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Paragraph</mat-label>
+		<textarea
+			matInput
+			required
+			#paragraph="ngModel"
+			placeholder="Enter a paragraph"
+			cdkAutosizeMinRows="5"
+			cdkTextareaAutosize
+			cdkAutosizeMaxRows="10"
+			[(ngModel)]="payload.text">
+		</textarea>
+		<mat-error *ngIf="paragraph.hasError('required')">
+			Paragraph is required
+		</mat-error>
+	</mat-form-field>
+</div>

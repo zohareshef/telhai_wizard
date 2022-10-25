@@ -1,0 +1,14 @@
+{
+	"editor.formatOnSave": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "vscode.css-language-features",
+		"editor.formatOnSave": true,
+		"editor.suggest.insertMode": "replace"
+	},
+	"[json]": {
+		"editor.formatOnSave": true
+	}
+}

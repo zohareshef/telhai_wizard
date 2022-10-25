@@ -1,0 +1,58 @@
+<div class="container">
+	<nav>
+		<mat-toolbar class="mat-elevation-z4">
+			<a mat-button class="logo" color="accent" routerLink="/">
+				<i class="fa-duotone fa-hat-wizard"></i>
+				<span>Wizzy</span>
+				<!-- <mat-icon>favorite</mat-icon> -->
+			</a>
+
+			<span style="flex: 1 1 auto"></span>
+			<button
+				*ngIf="(user$ | async) === null"
+				mat-stroked-button
+				(click)="openDialog()">
+				<mat-icon>login</mat-icon>
+				Login
+			</button>
+
+			<span
+				*ngIf="user$ | async as user"
+				class="user-menu"
+				[mat-menu-trigger-for]="menu">
+				<button mat-icon-button>
+					<img
+						style="background-color: white; border-radius: 50%"
+						src="https://avatars.dicebear.com/api/miniavs/{{
+							(user$ | async)?._id
+						}}.svg" />
+				</button>
+				<span>{{ user.firstname }} {{ user.lastname }}</span>
+				<mat-menu #menu>
+					<a mat-menu-item routerLink="/new" *ngIf="user.role !== 'user'">
+						<mat-icon>library_add</mat-icon>
+						<span>Create Wizard</span>
+					</a>
+					<a
+						mat-menu-item
+						routerLink="/my-wizards"
+						*ngIf="user.role !== 'user'">
+						<mat-icon>backup_table</mat-icon>
+						<span>Wizards</span>
+					</a>
+
+					<button mat-menu-item (click)="handleLogout()">
+						<mat-icon>logout</mat-icon>
+						<span>Logout</span>
+					</button>
+				</mat-menu>
+			</span>
+		</mat-toolbar>
+	</nav>
+
+	<main>
+		<div id="content">
+			<ng-content></ng-content>
+		</div>
+	</main>
+</div>

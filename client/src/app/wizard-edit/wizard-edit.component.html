@@ -1,0 +1,5 @@
+<div *ngIf="loading" style="display: flex; justify-content: center">
+	<mat-spinner color="accent" diameter="25"></mat-spinner>
+</div>
+<div *ngIf="error">{{ error }}</div>
+<app-wizard-builder *ngIf="wizard" [wizard]="wizard"></app-wizard-builder>

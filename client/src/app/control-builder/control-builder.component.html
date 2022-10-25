@@ -1,0 +1,70 @@
+<div class="picker-container">
+	<div style="flex: 1; display: flex; flex-flow: column nowrap">
+		<app-text-builder [control]="control" *ngIf="control.type === 'text'">
+		</app-text-builder>
+		<app-secured-builder [control]="control" *ngIf="control.type === 'secured'">
+		</app-secured-builder>
+		<app-label-builder [control]="control" *ngIf="control.type === 'label'">
+		</app-label-builder>
+		<app-paragraph-builder
+			[control]="control"
+			*ngIf="control.type === 'paragraph'">
+		</app-paragraph-builder>
+		<app-checkbox-builder
+			[control]="control"
+			*ngIf="control.type === 'checkbox'">
+		</app-checkbox-builder>
+		<app-radio-builder [control]="control" *ngIf="control.type === 'radio'">
+		</app-radio-builder>
+		<app-image-builder [control]="control" *ngIf="control.type === 'image'">
+		</app-image-builder>
+		<app-select-builder [control]="control" *ngIf="control.type === 'select'">
+		</app-select-builder>
+	</div>
+
+	<div
+		style="
+			padding: 0em 12px;
+			align-self: stretch;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: space-between;
+		">
+		<button
+			mat-icon-button
+			color="primary"
+			[matMenuTriggerFor]="menu"
+			aria-label="Example icon-button with a menu"
+			matTooltip="{{ control.type | titlecase }}">
+			<mat-icon>{{ controlTypeToIcon(control.type) }}</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button
+				mat-menu-item
+				*ngFor="let type of controlTypes"
+				(click)="changeControlType(type)">
+				<mat-icon> {{ controlTypeToIcon(type) }}</mat-icon>
+				{{ type | titlecase }}
+			</button>
+		</mat-menu>
+		<button
+			mat-icon-button
+			matTooltip="Move up"
+			(click)="move.emit('up')"
+			[disabled]="moveUpDisabled">
+			<mat-icon>arrow_upward</mat-icon>
+		</button>
+
+		<button
+			matTooltip="Move down"
+			mat-icon-button
+			(click)="move.emit('down')"
+			[disabled]="moveDownDisabled">
+			<mat-icon>arrow_downward</mat-icon>
+		</button>
+
+		<button mat-icon-button color="warn" (click)="remove.emit()">
+			<mat-icon>delete</mat-icon>
+		</button>
+	</div>
+</div>

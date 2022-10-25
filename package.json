@@ -1,0 +1,16 @@
+{
+	"name": "wizard",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "cd client && npm run build",
+		"start": "cd server && npm start",
+		"dev:client": "cd client && npm start",
+		"dev:server": "cd server && npm run dev",
+		"postinstall": "cd client && npm i && cd ../server && npm i"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

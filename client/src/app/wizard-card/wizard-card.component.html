@@ -1,0 +1,50 @@
+<mat-card>
+	<mat-card-header>
+		<div
+			mat-card-avatar
+			matTooltip="{{ author.firstname }} {{ author.lastname }}">
+			<button mat-icon-button>
+				<img
+					matCardAvatar
+					style="background-color: white"
+					src="https://avatars.dicebear.com/api/miniavs/{{ author._id }}.svg" />
+			</button>
+		</div>
+		<mat-card-title>{{ wizard.title }}</mat-card-title>
+		<mat-card-subtitle *ngIf="wizard.updated">
+			Updated {{ wizard.updated | dateAgo }}
+		</mat-card-subtitle>
+		<mat-card-subtitle *ngIf="!wizard.updated">
+			{{ wizard.created | dateAgo }}
+		</mat-card-subtitle>
+
+		<button
+			mat-icon-button
+			style="margin-left: auto"
+			[matMenuTriggerFor]="menu"
+			aria-label="Example icon-button with a menu">
+			<mat-icon>more_vert</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button
+				mat-menu-item
+				*ngIf="showSubmissionsBtn"
+				(click)="showSubmissions()">
+				<mat-icon color="accent">star</mat-icon>
+				Show Submissions
+			</button>
+			<button mat-menu-item (click)="copyLink()">
+				<mat-icon>link</mat-icon>
+				Copy Link
+			</button>
+			<button mat-menu-item (click)="edit.emit(wizard)">
+				<mat-icon>edit</mat-icon>
+				Edit wizard
+			</button>
+			<button mat-menu-item (click)="delete.emit(wizard)">
+				<mat-icon color="warn">delete</mat-icon>
+				Delete wizard
+			</button>
+		</mat-menu>
+	</mat-card-header>
+</mat-card>

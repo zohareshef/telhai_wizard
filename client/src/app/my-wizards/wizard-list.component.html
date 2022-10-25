@@ -1,0 +1,25 @@
+<div *ngIf="loading" style="display: flex; justify-content: center">
+	<mat-spinner color="accent" diameter="25"></mat-spinner>
+</div>
+<div *ngIf="error">{{ error }}</div>
+
+<ng-container *ngIf="wizards">
+	<div
+		*ngIf="wizards.length"
+		style="display: flex; flex-flow: column nowrap; gap: 1em">
+		<app-wizard-card
+			*ngFor="let wizard of wizards; let wizardIndex = index"
+			[wizard]="wizard"
+			(edit)="editWizard(wizard)"
+			(delete)="deleteWizard(wizardIndex)">
+		</app-wizard-card>
+	</div>
+	<div
+		class="empty-message"
+		style="text-align: center"
+		*ngIf="wizards.length === 0">
+		<h1>There are no wizards yet!</h1>
+		<h3>Come back after you've created some wizards</h3>
+		<a routerLink="/new" mat-stroked-button color="accent"> CREATE A WIZARD </a>
+	</div>
+</ng-container>

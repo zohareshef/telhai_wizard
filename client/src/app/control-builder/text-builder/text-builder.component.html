@@ -1,0 +1,77 @@
+<div class="control-editor">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Label</mat-label>
+		<input
+			#label="ngModel"
+			matInput
+			required
+			[(ngModel)]="payload.label"
+			placeholder="Enter label" />
+		<mat-error *ngIf="label.hasError('required')">
+			Label is required
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Placeholder</mat-label>
+		<input
+			matInput
+			[(ngModel)]="payload.placeholder"
+			placeholder="Enter placeholder" />
+	</mat-form-field>
+</div>
+<div class="control-editor">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Type</mat-label>
+		<mat-select [(ngModel)]="payload.inputType">
+			<mat-option *ngFor="let type of INPUT_TYPES" [value]="type">
+				{{ type | titlecase }}
+			</mat-option>
+		</mat-select>
+		<mat-error> This is some error </mat-error>
+	</mat-form-field>
+
+	<ng-container *ngIf="payload.inputType === 'pattern'">
+		<mat-form-field appearance="outline" floatLabel="always">
+			<mat-label>Regular Expression</mat-label>
+			<input
+				#pattern="ngModel"
+				matInput
+				[(ngModel)]="payload.pattern"
+				required
+				appValidRegex />
+			<mat-error *ngIf="pattern.hasError('required')">
+				Pattern is required
+			</mat-error>
+			<mat-error *ngIf="pattern.hasError('regex')">
+				Invalid Regular Expression
+			</mat-error>
+		</mat-form-field>
+	</ng-container>
+	<ng-container *ngIf="payload.inputType === 'range'">
+		<mat-form-field appearance="outline" floatLabel="always">
+			<mat-label>Min Value</mat-label>
+			<input
+				#min="ngModel"
+				matInput
+				[(ngModel)]="payload.min"
+				required
+				type="number" />
+			<mat-error *ngIf="min.hasError('required')">
+				Min value is required
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" floatLabel="always">
+			<mat-label>Max Value</mat-label>
+			<input
+				matInput
+				#max="ngModel"
+				[(ngModel)]="payload.max"
+				required
+				type="number" />
+			<mat-error *ngIf="max.hasError('required')">
+				Max value is required
+			</mat-error>
+		</mat-form-field>
+	</ng-container>
+</div>

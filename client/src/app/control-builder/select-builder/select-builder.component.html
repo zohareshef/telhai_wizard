@@ -1,0 +1,57 @@
+<div class="control-editor">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Label</mat-label>
+		<input
+			#label="ngModel"
+			matInput
+			required
+			[(ngModel)]="payload.label"
+			placeholder="Enter label" />
+		<mat-error *ngIf="label.hasError('required')">
+			Label is required
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Placeholder</mat-label>
+		<input
+			matInput
+			[(ngModel)]="payload.placeholder"
+			placeholder="Enter placeholder" />
+	</mat-form-field>
+</div>
+<div
+	class="control-editor"
+	*ngFor="let option of payload.options; let i = index"
+	style="align-items: center">
+	<mat-form-field appearance="outline" floatLabel="always">
+		<mat-label>Option #{{ i + 1 }} Display Text</mat-label>
+		<input
+			#text="ngModel"
+			matInput
+			required
+			[(ngModel)]="option.text"
+			placeholder="Enter display text" />
+
+		<button
+			*ngIf="payload.options.length > 1"
+			matSuffix
+			color="warn"
+			mat-icon-button
+			aria-label="Clear"
+			(click)="removeOption(i)">
+			<mat-icon>close</mat-icon>
+		</button>
+		<mat-error *ngIf="text.hasError('required')">
+			Display text is required
+		</mat-error>
+	</mat-form-field>
+</div>
+<div class="control-editor" style="justify-content: center">
+	<button
+		mat-icon-button
+		color="primary"
+		(click)="addOption()"
+		matTooltip="Add Another Item">
+		<mat-icon>add</mat-icon>
+	</button>
+</div>

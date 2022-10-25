@@ -1,0 +1,55 @@
+mat-form-field {
+  width: 100%;
+}
+
+:host(app-checkbox-control) {
+  .checkbox-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em
+  }
+}
+
+:host(app-radio-control) {
+  mat-radio-group {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+  }
+}
+
+:host(app-image-control) {
+  .image-container {
+    border-radius: 4px;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    display: flex;
+
+    .open-button {
+      position: absolute;
+
+      top: 0;
+      right: 0;
+    }
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mat-input-element:disabled {
+    color: currentColor
+  }
+
+  .mat-select-disabled .mat-select-value {
+    color: currentColor;
+  }
+}

@@ -1,0 +1,130 @@
+<ng-container *ngIf="wizard">
+	<h1 class="wizard-title">{{ wizard.title }}</h1>
+	<mat-card>
+		<mat-card-title>
+			{{ currentPage.title }}
+		</mat-card-title>
+		<mat-card-subtitle>{{ currentPage.description }}</mat-card-subtitle>
+		<mat-card-content class="forms-wrapper">
+			<mat-card
+				class="mat-elevation-z0"
+				*ngFor="let form of currentPage.forms; let f = index">
+				<mat-card-title>{{ form.title }}</mat-card-title>
+				<mat-card-subtitle>{{ form.description }}</mat-card-subtitle>
+				<mat-card-content>
+					<mat-divider></mat-divider>
+					<ng-container *ngFor="let control of form.controls; let c = index">
+						<app-label-control
+							*ngIf="control.type === 'label'"
+							[answered]="readonly"
+							[wizardControl]="control">
+						</app-label-control>
+
+						<app-paragraph-control
+							*ngIf="control.type === 'paragraph'"
+							[answered]="readonly"
+							[wizardControl]="control">
+						</app-paragraph-control>
+
+						<app-text-control
+							*ngIf="control.type === 'text'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-text-control>
+						<app-secured-control
+							*ngIf="control.type === 'secured'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-secured-control>
+						<app-checkbox-control
+							*ngIf="control.type === 'checkbox'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-checkbox-control>
+						<app-radio-control
+							*ngIf="control.type === 'radio'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-radio-control>
+						<app-select-control
+							*ngIf="control.type === 'select'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-select-control>
+						<app-image-control
+							*ngIf="control.type === 'image'"
+							[answered]="readonly"
+							[wizardControl]="control"
+							[_formControl]="getControl(pageIndex, f, c)">
+						</app-image-control>
+					</ng-container>
+				</mat-card-content>
+			</mat-card>
+			<div class="paginator">
+				<div>
+					<button
+						mat-button
+						color="primary"
+						[disabled]="disableBackButton"
+						(click)="pageBack()">
+						<mat-icon>chevron_left</mat-icon>
+						<span>Back</span>
+					</button>
+				</div>
+				<div class="page-number">
+					<div>{{ pageIndex + 1 }} / {{ wizard.pages.length }}</div>
+				</div>
+				<div>
+					<button
+						*ngIf="showSubmit"
+						mat-button
+						color="accent"
+						[disabled]="disableSubmit"
+						(click)="submit()">
+						<div>
+							<ng-container *ngIf="!working">SUBMIT</ng-container>
+							<mat-spinner
+								color="accent"
+								diameter="16"
+								*ngIf="working"></mat-spinner>
+						</div>
+					</button>
+					<button mat-button *ngIf="showSuccessButton" color="accent">
+						<mat-icon>check</mat-icon>
+					</button>
+					<button
+						*ngIf="showNextButton"
+						mat-button
+						color="primary"
+						[disabled]="disableNextButton"
+						(click)="pageNext()">
+						<span>Next</span>
+						<mat-icon>chevron_right</mat-icon>
+					</button>
+				</div>
+			</div>
+
+			<div>
+				<p *ngIf="showSuccessMessage">
+					Thank you for answering the form. You will be redirected to home page
+					in 3 seconds...
+				</p>
+				<p
+					*ngIf="showErrorMessage"
+					style="
+						display: flex;
+						place-content: center;
+						place-items: center;
+						gap: 1em;
+					">
+					<mat-icon color="warn">error</mat-icon> <span> {{ error }}</span>
+				</p>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</ng-container>

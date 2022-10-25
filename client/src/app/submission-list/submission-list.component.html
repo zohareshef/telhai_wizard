@@ -1,0 +1,36 @@
+<div *ngIf="loading" style="display: flex; justify-content: center">
+	<mat-spinner color="accent" diameter="25"></mat-spinner>
+</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div style="display: flex; flex-flow: column nowrap; gap: 1em">
+	<ng-container *ngIf="submissions.length > 0">
+		<h2>{{ submissions[0].wizard.title }} - Submissions</h2>
+	</ng-container>
+	<app-submission-card
+		(view)="viewSubmision(submission)"
+		*ngFor="let submission of submissions"
+		[submission]="submission">
+	</app-submission-card>
+</div>
+
+<div
+	class="empty-message"
+	style="text-align: center"
+	*ngIf="submissions.length === 0">
+	<h1>There are no submissions yet!</h1>
+	<h3>Share this link with someone and start getting submissions</h3>
+	<div class="link-container">
+		<mat-form-field appearance="outline">
+			<input matInput readonly value="{{ submissionLink }}" />
+			<button
+				matSuffix
+				mat-icon-button
+				matTooltip="Copy Link"
+				color="accent"
+				(click)="copyLink()">
+				<mat-icon>content_copy</mat-icon>
+			</button>
+		</mat-form-field>
+	</div>
+</div>

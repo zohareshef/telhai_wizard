@@ -1,0 +1,122 @@
+<div mat-dialog-content>
+	<mat-tab-group dynamicHeight>
+		<mat-tab #loginTab label="Login">
+			<form [formGroup]="loginForm">
+				<p>
+					<mat-form-field>
+						<mat-label>Email</mat-label>
+						<input matInput formControlName="email" />
+						<mat-error *ngIf="loginForm.hasError('required', 'email')">
+							Email is required
+						</mat-error>
+						<mat-error *ngIf="loginForm.hasError('email', 'email')">
+							Email is invalid
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<mat-label>Password</mat-label>
+						<input matInput type="password" formControlName="password" />
+						<mat-error *ngIf="loginForm.hasError('required', 'password')">
+							Password is required
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p style="text-align: center">
+					<mat-error *ngIf="errors.login">
+						{{ errors.login }}
+					</mat-error>
+				</p>
+				<p style="text-align: center">
+					<button
+						*ngIf="loginTab.isActive"
+						[disabled]="!isFormValid(loginForm)"
+						(click)="handleLogin()"
+						mat-raised-button
+						color="primary">
+						Login
+					</button>
+				</p>
+			</form>
+		</mat-tab>
+		<mat-tab label="Register">
+			<form [formGroup]="registerForm">
+				<p>
+					<mat-form-field>
+						<mat-label>Email</mat-label>
+						<input matInput formControlName="email" />
+						<mat-error *ngIf="registerForm.hasError('required', 'email')">
+							Email is required
+						</mat-error>
+						<mat-error *ngIf="registerForm.hasError('email', 'email')">
+							Email is invalid
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<mat-label>First name</mat-label>
+						<input matInput formControlName="firstname" />
+						<mat-error *ngIf="registerForm.hasError('required', 'firstname')">
+							First name is required
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<mat-label>Last name</mat-label>
+						<input matInput formControlName="lastname" />
+						<mat-error *ngIf="registerForm.hasError('required', 'lastname')">
+							Last name is required
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<mat-label>Password</mat-label>
+						<input matInput type="password" formControlName="password" />
+						<mat-error *ngIf="registerForm.hasError('required', 'password')">
+							Password is required
+						</mat-error>
+						<mat-error *ngIf="registerForm.hasError('minlength', 'password')">
+							Password is too short
+						</mat-error>
+						<mat-error *ngIf="registerForm.hasError('maxlength', 'password')">
+							Password is too long
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p>
+					<mat-form-field>
+						<mat-label>Confirm Password</mat-label>
+						<input matInput type="password" formControlName="passwordConfirm" />
+						<mat-error
+							*ngIf="registerForm.hasError('required', 'passwordConfirm')">
+							Password confirmation is required
+						</mat-error>
+						<mat-error
+							*ngIf="registerForm.hasError('match', 'passwordConfirm')">
+							Passwords do not match
+						</mat-error>
+					</mat-form-field>
+				</p>
+				<p style="text-align: center">
+					<mat-error *ngIf="errors.register">
+						{{ errors.register }}
+					</mat-error>
+				</p>
+				<p style="text-align: center">
+					<button
+						*ngIf="!loginTab.isActive"
+						[disabled]="!isFormValid(registerForm)"
+						(click)="handleRegister()"
+						mat-raised-button
+						color="primary">
+						Register
+					</button>
+				</p>
+			</form>
+		</mat-tab>
+	</mat-tab-group>
+</div>

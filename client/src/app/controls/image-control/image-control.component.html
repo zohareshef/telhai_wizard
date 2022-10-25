@@ -1,0 +1,46 @@
+<mat-form-field appearance="outline" floatLabel="always" *ngIf="!answered">
+	<mat-label>{{ payload.label }}</mat-label>
+	<input
+		#upload
+		type="file"
+		hidden
+		accept="image/*"
+		(change)="onFileSelected($event)" />
+	<input
+		matInput
+		readonly
+		[placeholder]="payload.placeholder || 'Upload a file'"
+		[formControl]="filename" />
+
+	<button
+		*ngIf="_formControl.value"
+		matSuffix
+		mat-icon-button
+		(click)="onFileClear(); upload.value = ''">
+		<mat-icon>clear</mat-icon>
+	</button>
+	<button
+		*ngIf="!_formControl.value"
+		matSuffix
+		(click)="upload.click(); _formControl.markAsDirty()"
+		mat-icon-button>
+		<mat-icon>upload</mat-icon>
+	</button>
+	<mat-error *ngIf="_formControl?.hasError('required')">
+		This value is required
+	</mat-error>
+</mat-form-field>
+<div *ngIf="answered">
+	{{ payload.label }}
+	<div class="image-container">
+		<button
+			matTooltip="Open in a new tab"
+			class="open-button mat-elevation-z2"
+			(click)="openImage()"
+			mat-icon-button
+			color="accent">
+			<mat-icon>open_in_new</mat-icon>
+		</button>
+		<img [src]="_formControl.value" />
+	</div>
+</div>

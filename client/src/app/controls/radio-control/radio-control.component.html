@@ -1,0 +1,8 @@
+<mat-radio-group [formControl]="_formControl">
+	<mat-radio-button
+		(click)="onClick($event)"
+		*ngFor="let option of payload.options; let i = index"
+		[value]="i">
+		{{ option.text }}
+	</mat-radio-button>
+</mat-radio-group>

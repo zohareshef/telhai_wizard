@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline" floatLabel="always">
+	<mat-label>{{ payload.label }}</mat-label>
+	<mat-select
+		[formControl]="_formControl"
+		[placeholder]="payload.placeholder || 'Select an item'">
+		<mat-option
+			*ngFor="let option of payload.options; let i = index"
+			[value]="i">
+			{{ option.text }}
+		</mat-option>
+	</mat-select>
+	<mat-error *ngIf="_formControl?.hasError('required')">
+		This value is required
+	</mat-error>
+</mat-form-field>

@@ -1,0 +1,9 @@
+<div class="checkbox-wrapper">
+	<mat-checkbox
+		*ngFor="let option of payload.options; let i = index"
+		[checked]="this._formControl.value[i]"
+		(click)="onClick($event)"
+		(change)="onCheck(i)">
+		{{ option.text }}
+	</mat-checkbox>
+</div>

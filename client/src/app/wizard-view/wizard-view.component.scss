@@ -1,0 +1,28 @@
+.wizard-title {
+  text-align: center;
+}
+
+.paginator {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.forms-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+
+  mat-card {
+    // background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    mat-card-content {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 1em;
+    }
+  }
+}

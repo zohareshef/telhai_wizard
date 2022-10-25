@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" floatLabel="always">
+	<mat-label>{{ payload.label }}</mat-label>
+	<input
+		matInput
+		[formControl]="_formControl!"
+		[placeholder]="payload.placeholder"
+		[type]="inputType" />
+	<mat-error *ngIf="_formControl?.hasError('required')">
+		This value is required
+	</mat-error>
+	<mat-error
+		*ngIf="_formControl?.hasError('min') || _formControl?.hasError('max')">
+		Value must be between {{ payload.min }} and {{ payload.max }}
+	</mat-error>
+	<mat-error *ngIf="_formControl?.hasError('pattern')">
+		Value must match the pattern {{ payload.pattern }}
+	</mat-error>
+</mat-form-field>
