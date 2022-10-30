@@ -2,28 +2,21 @@
 	<nav>
 		<mat-toolbar class="mat-elevation-z4">
 			<a mat-button class="logo" color="accent" routerLink="/">
-				<i class="fa-duotone fa-hat-wizard"></i>
-				<span>Wizzy A</span>
+				<!-- <i class="fa-duotone fa-hat-wizard"></i>
+				<span>Wizzard.forms</span> -->
+				<img src="/assets/images/logo.png" alt="Tel Hai Wizard">
 				<!-- <mat-icon>favorite</mat-icon> -->
 			</a>
 
 			<span style="flex: 1 1 auto"></span>
-			<button
-				*ngIf="(user$ | async) === null"
-				mat-stroked-button
-				(click)="openDialog()">
+			<button *ngIf="(user$ | async) === null" mat-stroked-button (click)="openDialog()">
 				<mat-icon>login</mat-icon>
 				Login
 			</button>
 
-			<span
-				*ngIf="user$ | async as user"
-				class="user-menu"
-				[mat-menu-trigger-for]="menu">
+			<span *ngIf="user$ | async as user" class="user-menu" [mat-menu-trigger-for]="menu">
 				<button mat-icon-button>
-					<img
-						style="background-color: white; border-radius: 50%"
-						src="https://avatars.dicebear.com/api/miniavs/{{
+					<img style="background-color: white; border-radius: 50%" src="https://avatars.dicebear.com/api/miniavs/{{
 							(user$ | async)?._id
 						}}.svg" />
 				</button>
@@ -33,10 +26,7 @@
 						<mat-icon>library_add</mat-icon>
 						<span>Create Wizard</span>
 					</a>
-					<a
-						mat-menu-item
-						routerLink="/my-wizards"
-						*ngIf="user.role !== 'user'">
+					<a mat-menu-item routerLink="/my-wizards" *ngIf="user.role !== 'user'">
 						<mat-icon>backup_table</mat-icon>
 						<span>Wizards</span>
 					</a>
@@ -55,4 +45,52 @@
 			<ng-content></ng-content>
 		</div>
 	</main>
+
+
+	<footer class="footer-distributed">
+
+		<div class="footer-left">
+
+			<h3 routerLink="/">
+				<img style="width: 80px;" src="/assets/images/logo.png" alt="Tel Hai Wizard">
+			</h3>
+
+
+			<p class="footer-company-name">Tel-Hai Wizard © 2022. All rights reserved.</p>
+		</div>
+
+		<div class="footer-center">
+
+			<div style="float: left;">
+				<i class="fa fa-map-marker"></i>
+				<p><span>Upper Galilee, 9977</span> Qiryat Shemona, 1220800</p>
+			</div>
+
+			<div style="float: left;">
+				<i class="fa fa-phone"></i>
+				<p>050-8837769</p>
+			</div>
+
+			<div style="float: left;">
+				<i class="fa fa-envelope"></i>
+				<p><a href="mailto:telhai.wizard@gmail.com  ">telhai.wizard@gmail.com </a></p>
+
+			</div>
+
+		</div>
+
+		<div class="footer-right" style="clear:both;">
+
+			<p class="footer-company-about">
+				<span>About us</span>
+				This site was build as part of our final project.
+				we invite you to create your own wizard and share with your friends.
+				enjoy,
+				Michael Lifshitz and Zohar Reshef.
+			
+			</p>
+
+		</div>
+
+	</footer>
 </div>

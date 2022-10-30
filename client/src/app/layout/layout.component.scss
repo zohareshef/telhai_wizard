@@ -1,5 +1,5 @@
 @use "../../breakpoints" as bp;
-@import url('https://fonts.googleapis.com/css2?family=Blaka+Hollow&display=swap&text=Wizzy');
+@import url('https://fonts.googleapis.com/css2?family=Blaka+Hollow&display=swap');
 
 
 .container {
@@ -44,6 +44,7 @@ main {
 
 #content {
   margin: 0 1em;
+  position: relative;
 
   @include bp.mat-gt-xs {
     margin: 0 10%;
@@ -52,4 +53,5 @@ main {
   @include bp.mat-gt-sm {
     margin: 0 20%;
   }
+  
 }
